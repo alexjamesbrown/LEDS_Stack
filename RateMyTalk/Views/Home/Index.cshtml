@@ -6,9 +6,7 @@
     <div class="col-md-12">
         <h2>Review A Talk</h2>
         <p>Please select a talk to review:</p>
-
 		<hr />
-
 		<div class="panel-group">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -16,7 +14,17 @@
 					<span class="pull-right">Date of Talk</span>
 				</div>
 				<div class="panel-body">
-				    Panel Content goes here here here here here here here here here here
+				    <p>
+						Panel Content goes here here here here here here here here here here
+				    </p>
+
+					<a class="btn btn-success" 
+						asp-controller="Talk" 
+						asp-action="Rate"
+						asp-route-id="1">
+					Rate This Talk
+					</a>
+
 				</div>
 			</div>
 		</div>

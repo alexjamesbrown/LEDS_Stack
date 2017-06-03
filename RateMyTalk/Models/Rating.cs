@@ -1,0 +1,14 @@
+﻿using System;
+namespace RateMyTalk.Models
+{
+    public class Rating
+    {
+        public Rating()
+        {
+        }
+
+        public int Value { get; set; }
+
+        public string Comments { get; set; }
+    }
+}
