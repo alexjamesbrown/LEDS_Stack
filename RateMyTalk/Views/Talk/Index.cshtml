@@ -1,19 +1,51 @@
-﻿<div class="row">
+﻿@model RateMyTalk.Models.TalkDetailsViewModel
+
+<div class="row">
     <div class="col-md-12">
-        <h1>Talk Title</h1>
-        <h2>Talk Date | Speaker</h2>
+
+        <br /> <!--sorry! -->
+
+        <div class="well text-center">
+            <h1>@Model.Talk.Title <small>@Model.Talk.Date.ToString("MMM d, yyyy")</small></h1>
+
+            <h3>@Model.Talk.Speaker</h3>
+
+            <p>Description here</p>
+        </div>
 
         <hr />
-    
-		<h2>Rating<h2>
+
+        <h2>Rate This Talk</h2>
+
+	    <form asp-action="RateTalk" asp-controller="Talk">
+            <div class="form-group">
+                <label asp-for="NewRating.Value">Rating: &nbsp;&nbsp;</label>
+                @for(var i=1; i<=10; i++){
+                    <input asp-for="NewRating.Value" type="radio" value="@i" /> @i 
+                    <span>&nbsp;&nbsp;</span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NewRating.Comments">Comments: </label>
+                <textarea asp-for="NewRating.Comments" class="form-control" rows="5" id="comment"></textarea>
+            </div>
+
+            <input class="btn btn-success" type="submit" />
+        </form>
+
+        <hr />
+
+        <h2>Ratings</h2>
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <strong>Title of Talk</strong>
-                    <span class="pull-right">Date of Talk</span>
+                    @for(var i=1; i<=5; i++){
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    }
                 </div>
                 <div class="panel-body">
-                    Panel Content goes here here here here here here here here here here
+                    Comments go here here and here
                 </div>
             </div>
         </div>

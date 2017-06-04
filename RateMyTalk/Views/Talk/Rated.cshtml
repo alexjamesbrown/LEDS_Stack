@@ -1,3 +1,11 @@
-﻿<div class="row">
+﻿
+<div class="row">
     <h1>Thank you for your rating</h1>
+
+    <a class="btn btn-success" 
+        asp-controller="Talk" 
+        asp-action="Index"
+        asp-route-id="@ViewBag.Id">
+        View Ratings
+    </a>
 </div>
