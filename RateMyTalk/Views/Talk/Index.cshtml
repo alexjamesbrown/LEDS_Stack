@@ -10,14 +10,14 @@
 
             <h3>@Model.Talk.Speaker</h3>
 
-            <p>Description here</p>
+            <p>@Model.Talk.Description</p>
         </div>
 
         <hr />
 
         <h2>Rate This Talk</h2>
 
-	    <form asp-action="RateTalk" asp-controller="Talk">
+	    <form asp-action="RateTalk" asp-controller="Talk" asp-route-talkid="@Model.Talk.Id">
             <div class="form-group">
                 <label asp-for="NewRating.Value">Rating: &nbsp;&nbsp;</label>
                 @for(var i=1; i<=10; i++){
@@ -38,16 +38,22 @@
 
         <h2>Ratings</h2>
         <div class="panel-group">
+
+            @foreach(var rating in Model.Talk.Ratings){
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    @for(var i=1; i<=5; i++){
+                    @for(var i=1; i<=@rating.Value; i++){
                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                     }
                 </div>
                 <div class="panel-body">
-                    Comments go here here and here
+                    @rating.Comments
                 </div>
             </div>
+            <br />
+            }
+
+
         </div>
     </div>
 </div>

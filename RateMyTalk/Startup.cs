@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RateMyTalk.Models;
 
 namespace RateMyTalk
 {
@@ -27,6 +29,10 @@ namespace RateMyTalk
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //add db context to dependency injection
+            services.AddDbContext<RateMyTalkDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             // Add framework services.
             services.AddMvc();
         }
@@ -36,6 +42,14 @@ namespace RateMyTalk
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            //run db migrations automatically on startup
+            //and seed the database
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetService<RateMyTalkDbContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetService<RateMyTalkDbContext>().EnsureSeedData();
+            }
 
             if (env.IsDevelopment())
             {

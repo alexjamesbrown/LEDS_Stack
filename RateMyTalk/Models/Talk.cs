@@ -5,6 +5,11 @@ namespace RateMyTalk.Models
 {
     public class Talk
     {
+        public Talk()
+        {
+            Ratings = new List<Rating>();
+        }
+        
         public int Id { get; set; }
         
         public string Title { get; set; }
@@ -15,6 +20,6 @@ namespace RateMyTalk.Models
 
         public DateTime Date { get; set; }
 
-        public virtual IEnumerable<Rating> Ratings {get;set;}
+        public virtual ICollection<Rating> Ratings {get;set;}
     }
 }

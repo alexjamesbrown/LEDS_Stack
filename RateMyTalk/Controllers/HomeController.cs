@@ -1,21 +1,22 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 using RateMyTalk.Models;
 
 namespace RateMyTalk.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly RateMyTalkDbContext _db;
+
+        public HomeController(RateMyTalkDbContext db)
+        {
+            _db = db;
+        }
+
         public IActionResult Index()
         {
-            var talk = new Talk();
-            talk.Id = 1;
-            talk.Title = "Test Talk";
-            talk.Description = "This is a test description";
-            talk.Speaker = "John Smith";
-            talk.Date = DateTime.Today;
-
-            var talks = new []{talk};
+            var talks = _db.Talks.ToList();
 
             return View(talks);
         }
