@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<RateMyTalk.Models.Talk>
+@{
     ViewData["Title"] = "RateMyTalk";
 }
 
@@ -8,32 +9,28 @@
         <p>Please select a talk to review:</p>
 		<hr />
 		<div class="panel-group">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<strong>Title of Talk</strong>
-					<span class="pull-right">Date of Talk</span>
+
+			@foreach(var talk in Model){
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<strong>@talk.Title</strong>
+						<span class="pull-right">@talk.Date.ToString("MMM d, yyyy")</span>
+					</div>
+					<div class="panel-body">
+						<p>
+							@talk.Description
+						</p>
+
+						<a class="btn btn-success" 
+							asp-controller="Talk" 
+							asp-action="Index"
+							asp-route-id="@talk.Id">
+						View Talk
+						</a>
+					</div>
 				</div>
-				<div class="panel-body">
-				    <p>
-						Panel Content goes here here here here here here here here here here
-				    </p>
+			}
 
-					<a class="btn btn-warning" 
-						asp-controller="Talk" 
-						asp-action="Index"
-						asp-route-id="1">
-					View Ratings
-					</a>
-
-					<a class="btn btn-success" 
-						asp-controller="Talk" 
-						asp-action="Rate"
-						asp-route-id="1">
-					Rate This Talk
-					</a>
-
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
