@@ -27,6 +27,11 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="NewRating.Name">Name: </label>&nbsp;<small>(Optional)</small>
+                <input asp-for="NewRating.Name" class="form-control" />
+            </div>
+
+            <div class="form-group">
                 <label asp-for="NewRating.Comments">Comments: </label>
                 <textarea asp-for="NewRating.Comments" class="form-control" rows="5" id="comment"></textarea>
             </div>
@@ -38,12 +43,14 @@
 
         <h2>Ratings</h2>
         <div class="panel-group">
-
             @foreach(var rating in Model.Talk.Ratings){
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @for(var i=1; i<=@rating.Value; i++){
                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    }
+                    @if(!string.IsNullOrEmpty(rating.Name)){
+                        <span> - @rating.Name</span>
                     }
                 </div>
                 <div class="panel-body">
@@ -52,8 +59,6 @@
             </div>
             <br />
             }
-
-
         </div>
     </div>
 </div>

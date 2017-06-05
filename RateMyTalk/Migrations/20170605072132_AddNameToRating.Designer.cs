@@ -8,9 +8,10 @@ using RateMyTalk.Models;
 namespace RateMyTalk.Migrations
 {
     [DbContext(typeof(RateMyTalkDbContext))]
-    partial class RateMyTalkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170605072132_AddNameToRating")]
+    partial class AddNameToRating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
