@@ -19,8 +19,8 @@ namespace RateMyTalk.Controllers
         public IActionResult Index(int id)
         {
             var talk = _db.Talks
-                .Include(x=>x.Ratings)
-                .SingleOrDefault(x=> x.Id == id);
+                .Include(x => x.Ratings)
+                .SingleOrDefault(x => x.Id == id);
 
             //todo: if talk is null, return 404;
 
@@ -34,8 +34,15 @@ namespace RateMyTalk.Controllers
         [Route("talk/{id}/rate")]
         public IActionResult RateTalk(int talkId, Rating newRating)
         {
-            var talk = _db.Talks.SingleOrDefault(x=> x.Id == talkId);
+            var talk = _db.Talks.SingleOrDefault(x => x.Id == talkId);
             //todo: if talk is null
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new TalkDetailsViewModel(talk);
+                viewModel.Talk = talk;
+                return View("Index", viewModel);
+            }
 
             talk.Ratings.Add(newRating);
             _db.SaveChanges();
