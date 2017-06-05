@@ -1,0 +1,18 @@
+1. Import the public repository GPG keys:
+	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+
+2. Register the Microsoft SQL Server Ubuntu repository:
+	curl https://packages.microsoft.com/config/ubuntu/16.04/mssql-server.list | sudo tee /etc/apt/sources.list.d/mssql-server.list
+
+3. Install SQL Server
+	sudo apt-get update
+	sudo apt-get install -y mssql-server
+
+4. Run SQL Server Setup
+	sudo /opt/mssql/bin/mssql-conf setup
+
+
+5. Verify SQL Server is running
+	systemctl status mssql-server
+
+To allow remote connections, you *may* need to open the SQL Server TCP port on your firewall. The default SQL Server port is 1433.
