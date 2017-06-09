@@ -56,10 +56,8 @@ namespace RateMyTalk
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+
+            app.UseStatusCodePagesWithRedirects("/error/{0}");
 
             app.UseStaticFiles();
 

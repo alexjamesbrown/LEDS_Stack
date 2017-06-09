@@ -22,8 +22,11 @@ namespace RateMyTalk.Controllers
                 .Include(x => x.Ratings)
                 .SingleOrDefault(x => x.Id == id);
 
-            //todo: if talk is null, return 404;
-
+            if (talk == null)
+            {
+                return NotFound();
+            }
+            
             var viewModel = new TalkDetailsViewModel(talk);
 
             return View(viewModel);
@@ -35,7 +38,11 @@ namespace RateMyTalk.Controllers
         public IActionResult RateTalk(int talkId, Rating newRating)
         {
             var talk = _db.Talks.SingleOrDefault(x => x.Id == talkId);
-            //todo: if talk is null
+
+            if (talk == null)
+            {
+                return NotFound();
+            }
 
             if (!ModelState.IsValid)
             {

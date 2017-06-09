@@ -20,10 +20,5 @@ namespace RateMyTalk.Controllers
 
             return View(talks);
         }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
     }
 }
