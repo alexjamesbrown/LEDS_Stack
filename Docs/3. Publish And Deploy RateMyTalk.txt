@@ -3,18 +3,11 @@ dotnet publish -o /Users/alex/Desktop/RateMyTalk
 (must be in root of app directory)
 
 
-—Prepare Server—
-cd /var/www/
-rm -rf html
-
-
 —Use SCP to copy published folder—
 scp -r /Users/alex/Desktop/RateMyTalk/* root@<IP_ADDRESS>:/var/www
 
 
 —Create the service file—
-Create the service definition file:
-
 sudo nano /etc/systemd/system/kestrel-ratemytalk.service
 
 [Unit]
