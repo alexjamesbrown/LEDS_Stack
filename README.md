@@ -1,5 +1,5 @@
-#LEDS Stack#
-## & Developing ASP.net core applications with a Mac ##
+# LEDS Stack
+## & Developing ASP.net core applications with a Mac
 
 LEDS Stack is 
 
