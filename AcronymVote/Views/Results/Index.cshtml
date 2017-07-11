@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AcronymVote.Models.AcronymVoteResultViewModel>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="resultsH1">Results Are In!</h1>
+        <br/>
+        <br/>
+        @if (TempData["voteDeclined"] != null)
+        {
+            <div class="alert alert-danger ">
+                <h2>Thanks, but you've voted already.</h2>
+            </div>
+            <hr/>
+        }
+        
+        @if (TempData["votedAccepted"] != null)
+        {
+            <div class="alert alert-success ">
+                <h2>Thanks for voting.</h2>
+            </div>
+            <hr/>
+        }
+
+        <div class="col-md-12">
+
+            @foreach (var result in Model)
+            {
+                <span class="resultHeader">@result.Acronym</span>
+                <br />
+                <span class="resultDescription">@Html.Raw(result.Description)</span>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: @result.Percentage%">
+                        @if (result.Votes > 0)
+                        {
+                            <span class="resultBarText">@result.Votes votes</span>
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</div>

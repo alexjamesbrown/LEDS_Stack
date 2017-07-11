@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AcronymVote.Models.Acronym>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Acronym Vote</h1>
+        <h4>Please choose your favourite acronym for our stack:</h4>
+        <hr/>
+        <div class="panel-group">
+            @foreach (var acronym in Model)
+            {
+                <div class="row acronym">
+                    <div class="col-xs-3 col-sm-2">
+                        <form asp-controller="Home" asp-action="Vote" method="POST">
+                            <input type="hidden" name="Id" value="@acronym.Id"/>
+                            <input type="submit" value="Vote!" class="btn btn-success btn-lg"/>
+                        </form>
+                    </div>
+                    
+                    <div class="col-xs-6">
+                        <span class="acronymTitle">@Html.Raw(acronym.Value)</span>
+                        <p class="acronymDescription">
+                            @Html.Raw(acronym.Description)
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
