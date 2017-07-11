@@ -1,17 +1,17 @@
-—Install .net core for Ubuntu 16.10—
+-—Install .net core for Ubuntu 16.10—-
 sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ yakkety main" > /etc/apt/sources.list.d/dotnetdev.list'
 
+
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
-sudo apt-get update
-sudo apt-get install dotnet-dev-1.0.4
+sudo apt-get update && sudo apt-get install dotnet-dev-1.0.4
 
 
-—Install nginx—
-sudo apt-get install nginx
-sudo service nginx start
+-—Install & start nginx—-
+sudo apt-get install nginx && sudo service nginx start
 
 
-—Configure nginx—
+-—Configure nginx—-
+rm /etc/nginx/sites-available/default
 sudo nano /etc/nginx/sites-available/default
 
 __REPLACE__
@@ -29,14 +29,14 @@ server {
 }
 
 
-—Verify nginx—
+-—Verify nginx—-
 nginx -t
 
 
-—Reload nginx—
+-—Reload nginx—-
 sudo nginx -s reload
 
 
-—Prepare Server for app—
+-—Prepare Server for app—-
 cd /var/www/
 rm -rf html

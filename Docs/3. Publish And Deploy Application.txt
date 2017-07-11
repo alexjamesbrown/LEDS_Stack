@@ -1,0 +1,35 @@
+-—Publish .net app—-
+dotnet publish -o /Users/alex/Desktop/AcronymVote
+(must be in root of app directory)
+
+
+-—Use SCP to copy published folder—-
+scp -r /Users/alex/Desktop/AcronymVote/* root@<IP_ADDRESS>:/var/www
+
+
+-—Create the service file—-
+sudo nano /etc/systemd/system/kestrel-acronymvote.service
+
+[Unit]
+Description=AcronymVote
+
+[Service]
+WorkingDirectory=/var/www
+ExecStart=/usr/bin/dotnet /var/www/AcronymVote.dll
+Restart=always
+RestartSec=10
+SyslogIdentifier=dotnet-AcronymVote
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production 
+
+[Install]
+WantedBy=multi-user.target
+
+
+-—Save the file and enable the service—-
+systemctl enable kestrel-acronymvote.service
+
+
+-—Start the service and verify that it is running—-
+systemctl start kestrel-acronymvote.service
+systemctl status kestrel-acronymvote.service
